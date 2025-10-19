@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Newton School Popup Blocker",
+  "version": "1.0",
+  "description": "Blocks annoying popups on Newton School website",
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.newtonschool.co/*",
+        "https://*.newtonschool.co/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
