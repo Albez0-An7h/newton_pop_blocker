@@ -13,7 +13,7 @@ A Chrome extension that automatically handles annoying popups on Newton School's
 ## Installation
 
 ### Step 1: Download the Extension
-1. Download or clone this repository to your computer
+1. Download the zip file from `Releases` and unzip it or clone this repository to your computer
 2. Make sure all files are in the same folder:
    - `manifest.json`
    - `content.js`
@@ -41,7 +41,7 @@ A Chrome extension that automatically handles annoying popups on Newton School's
 ### Step 5: Test the Extension
 1. Visit [Newton School](https://my.newtonschool.co)
 2. Try copying and pasting code with `Cmd+V` (Mac) or `Ctrl+V` (Windows/Linux)
-3. The popup should appear briefly and automatically dismiss itself
+3. The popup should appear very briefly and automatically dismiss itself or not appear at all
 4. Your code should paste with proper formatting! ✅
 
 ## Troubleshooting
