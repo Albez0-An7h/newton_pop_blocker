@@ -1,3 +1,17 @@
+// Function to auto-click button with specific class
+function autoClickTargetButton() {
+    // Find button with class "sc-gyycJP eFsIHd"
+    const targetButton = document.querySelector('button.sc-gyycJP.eFsIHd');
+    
+    if (targetButton) {
+        targetButton.click();
+        console.log('Newton Popup Blocker: Auto-clicked target button with class sc-gyycJP eFsIHd');
+        return true;
+    }
+    
+    return false;
+}
+
 // Function to auto-click "Keep Code" button
 function autoClickKeepCode() {
     // Find all popup elements
@@ -41,8 +55,14 @@ function autoClickKeepCode() {
     }
 }
 
+// Combined function to handle all auto-clicks
+function autoClickAll() {
+    autoClickTargetButton();
+    autoClickKeepCode();
+}
+
 // Run immediately
-autoClickKeepCode();
+autoClickAll();
 
 // Use MutationObserver to watch for dynamically added popups
 const observer = new MutationObserver((mutations) => {
@@ -53,11 +73,12 @@ const observer = new MutationObserver((mutations) => {
                 if (node.classList && (node.classList.contains('sc-bcdf66b-0') || node.classList.contains('keUCwH') || 
                     node.classList.contains('sc-bcdf66b-1') || node.classList.contains('cCcvSA') ||
                     node.classList.contains('sc-bcdf66b-2') || node.classList.contains('gqLsyk'))) {
-                    autoClickKeepCode();
+                    autoClickAll();
                 } else if (node.querySelectorAll) {
                     const hasPopup = node.querySelectorAll('.sc-bcdf66b-0.keUCwH, .sc-bcdf66b-1.cCcvSA, .sc-bcdf66b-2.gqLsyk').length > 0;
-                    if (hasPopup) {
-                        autoClickKeepCode();
+                    const hasTargetButton = node.querySelectorAll('button.sc-gyycJP.eFsIHd').length > 0;
+                    if (hasPopup || hasTargetButton) {
+                        autoClickAll();
                     }
                 }
             }
@@ -75,40 +96,40 @@ observer.observe(document.documentElement, {
 let checkCount = 0;
 const maxChecks = 20;
 const intervalId = setInterval(() => {
-    autoClickKeepCode();
+    autoClickAll();
     checkCount++;
     if (checkCount >= maxChecks) {
         clearInterval(intervalId);
     }
 }, 500);
 
-// Auto-click "Keep Code" button when paste happens
+// Auto-click buttons when paste happens
 document.addEventListener('paste', function(e) {
     // Let the paste happen normally (don't stop propagation)
-    // Just auto-click the button quickly
-    setTimeout(autoClickKeepCode, 0);
-    setTimeout(autoClickKeepCode, 10);
-    setTimeout(autoClickKeepCode, 50);
-    setTimeout(autoClickKeepCode, 100);
+    // Just auto-click the buttons quickly
+    setTimeout(autoClickAll, 0);
+    setTimeout(autoClickAll, 10);
+    setTimeout(autoClickAll, 50);
+    setTimeout(autoClickAll, 100);
 }, false);
 
 // Also handle keyboard events
 document.addEventListener('keydown', function(e) {
     if ((e.metaKey || e.ctrlKey) && e.key === 'v') {
-        // Auto-click Keep Code when Cmd+V is pressed
-        setTimeout(autoClickKeepCode, 0);
-        setTimeout(autoClickKeepCode, 10);
-        setTimeout(autoClickKeepCode, 50);
-        setTimeout(autoClickKeepCode, 100);
-        setTimeout(autoClickKeepCode, 200);
+        // Auto-click buttons when Cmd+V is pressed
+        setTimeout(autoClickAll, 0);
+        setTimeout(autoClickAll, 10);
+        setTimeout(autoClickAll, 50);
+        setTimeout(autoClickAll, 100);
+        setTimeout(autoClickAll, 200);
     }
     
     // Also handle copy and cut
     if ((e.metaKey || e.ctrlKey) && (e.key === 'c' || e.key === 'x')) {
-        setTimeout(autoClickKeepCode, 0);
-        setTimeout(autoClickKeepCode, 10);
-        setTimeout(autoClickKeepCode, 50);
+        setTimeout(autoClickAll, 0);
+        setTimeout(autoClickAll, 10);
+        setTimeout(autoClickAll, 50);
     }
 }, false);
 
-console.log('Newton Popup Blocker: Extension loaded - will auto-click Keep Code button');
+console.log('Newton Popup Blocker: Extension loaded - will auto-click Keep Code button and target button with class sc-gyycJP eFsIHd');
