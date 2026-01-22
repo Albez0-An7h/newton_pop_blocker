@@ -1,11 +1,16 @@
 // Function to auto-click button with specific class
 function autoClickTargetButton() {
     // Find button with class "sc-gyycJP eFsIHd"
-    const targetButton = document.querySelector('button.sc-gyycJP.eFsIHd');
+    let targetButton = document.querySelector('button.sc-gyycJP.eFsIHd');
+    
+    if (!targetButton) {
+        // Also check for "sc-gyycJP bWfIna" class
+        targetButton = document.querySelector('button.sc-gyycJP.bWfIna');
+    }
     
     if (targetButton) {
         targetButton.click();
-        console.log('Newton Popup Blocker: Auto-clicked target button with class sc-gyycJP eFsIHd');
+        console.log('Newton Popup Blocker: Auto-clicked target button with class sc-gyycJP', targetButton.className);
         return true;
     }
     
@@ -76,7 +81,7 @@ const observer = new MutationObserver((mutations) => {
                     autoClickAll();
                 } else if (node.querySelectorAll) {
                     const hasPopup = node.querySelectorAll('.sc-bcdf66b-0.keUCwH, .sc-bcdf66b-1.cCcvSA, .sc-bcdf66b-2.gqLsyk').length > 0;
-                    const hasTargetButton = node.querySelectorAll('button.sc-gyycJP.eFsIHd').length > 0;
+                    const hasTargetButton = node.querySelectorAll('button.sc-gyycJP.eFsIHd, button.sc-gyycJP.bWfIna').length > 0;
                     if (hasPopup || hasTargetButton) {
                         autoClickAll();
                     }
